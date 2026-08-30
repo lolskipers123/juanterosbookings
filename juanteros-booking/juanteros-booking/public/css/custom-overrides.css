@@ -1,0 +1,372 @@
+/* ===========================================================
+   Juantero's Staycation — custom overrides on top of the
+   cloned template UI (style.css / responsive.css).
+   Only visual tweaks live here: swapped background photos,
+   the text logo, and small helper classes for the dynamic
+   room cards rendered by app.js.
+   =========================================================== */
+
+/* Logo image in the header */
+.navbar .logo_h {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.navbar .logo_h img {
+  height: 62px;
+  width: auto;
+  display: block;
+}
+
+/* Hero banner background -> Juantero's photo */
+.banner_area .bg-parallax {
+  background-image: url("../images/hero-bg.jpg");
+}
+
+/* Facilities section background -> Juantero's photo */
+.facilities_area .bg-parallax {
+  background-image: url("../images/gallery-2.jpg");
+}
+
+/* -----------------------------------------------------------
+   FIX: the room cards are injected into #rooms-grid by app.js
+   after page load. With only 2 rooms (columns sized for 3-up),
+   Bootstrap's default left-aligned row leaves an empty gap on
+   the right. Center the cards instead so 1, 2, or 3 rooms all
+   look intentional.
+   ----------------------------------------------------------- */
+#rooms-grid.row {
+  justify-content: center;
+}
+
+/* -----------------------------------------------------------
+   FIX: the template never constrains <img> dimensions (only
+   Bootstrap's .img-fluid class does, and the room-card images
+   didn't have it). Real photos are much bigger than the old
+   template's pre-sized stock photos, so without an explicit
+   box they rendered at full native resolution and blew out
+   every card. Give every photo a real, responsive box.
+   ----------------------------------------------------------- */
+.accomodation_item .hotel_img {
+  height: 220px;
+}
+.accomodation_item .hotel_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+/* The template puts the "Book Now" button floating on top of the
+   photo (position:absolute). Some of our room photos already have
+   text baked into them, so an overlapping button reads messy —
+   place it as a normal button below the room details instead. */
+/* Make every room card the same height within its row, with the
+   Reserve button pinned to the bottom, so buttons form a straight
+   line across the row even when rooms have different detail-list
+   lengths (e.g. "1 Room" vs a 6-item list). */
+.accomodation_item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.accomodation_item .room-reserve-btn {
+  position: static;
+  transform: none;
+  display: inline-block;
+  width: 180px;
+  align-self: center;
+  margin-top: auto;
+  padding-top: 15px;
+  max-width: none;
+}
+
+/* Instagram-style footer thumbnails need the same fix */
+.single-footer-widget.instafeed .list_style li {
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.single-footer-widget.instafeed .list_style li img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Room detail bullet list inside accomodation cards */
+.accomodation_item .room-details {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 15px;
+  text-align: left;
+  color: #777777;
+  font-size: 14px;
+}
+.accomodation_item .room-details li {
+  padding: 3px 0 3px 20px;
+  position: relative;
+}
+.accomodation_item .room-details li::before {
+  content: "\f00c";
+  font-family: "FontAwesome";
+  position: absolute;
+  left: 0;
+  color: #f3c300;
+  font-size: 12px;
+}
+.accomodation_item .capacity-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 12px;
+  background: #f9f9ff;
+  color: #222222;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* "A Peek Around Juantero's" - lightbox-style slider. A large centered
+   photo with the neighboring photos peeking in dimmed on either side
+   (owl-carousel "center" mode), sitting directly on the page background.
+   Photos use object-fit: cover on a wide frame so every photo fills the
+   frame cleanly with no grey letterbox bars. */
+.gallery_slider {
+  position: relative;
+  max-width: 1850px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  box-sizing: border-box;
+}
+@media (min-width: 1200px) {
+  #gallery > .container {
+    max-width: 1900px;
+  }
+}
+.gallery_slider .owl-stage-outer {
+  overflow: hidden;
+}
+.gallery_slider .gallery_slide {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #f2f2f2;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.45;
+  transform: scale(0.8);
+  filter: brightness(0.85);
+  transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+}
+.gallery_slider .owl-item.center {
+  z-index: 2;
+}
+.gallery_slider .owl-item.center .gallery_slide {
+  opacity: 1;
+  transform: scale(1.15);
+  filter: brightness(1);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+.gallery_slider .owl-item:not(.center) .gallery_slide {
+  cursor: pointer;
+}
+.gallery_slider .owl-item:not(.center) .gallery_slide:hover {
+  opacity: 0.7;
+  transform: scale(0.85);
+  filter: brightness(0.95);
+}
+.gallery_slider .gallery_slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Arrow buttons removed - visitors swipe or click a side photo instead */
+
+@media (max-width: 767px) {
+  .gallery_slider {
+    /* No arrow buttons to leave room for anymore, so shrink the outer
+       gutter and give that space back to the photo instead. */
+    padding: 16px 14px;
+  }
+  /* Below 768px the carousel shows 1 photo at a time (see custom.js
+     responsive config), so there's no dimmed side photo to "peek" at
+     anymore - reset the zoom so the single visible photo displays at
+     full, uncropped size instead of being scaled/clipped for an effect
+     that no longer applies. */
+  .gallery_slider .owl-item.center .gallery_slide {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery_slider {
+    padding: 12px 10px;
+  }
+}
+
+/* Message box for booking form feedback */
+.message-box {
+  margin-top: 20px;
+  padding: 12px 18px;
+  border-radius: 4px;
+  font-size: 15px;
+  display: none;
+}
+.message-box.success {
+  display: block;
+  background: #eaf7ea;
+  color: #1e7e34;
+  border: 1px solid #b7e0b8;
+}
+.message-box.error {
+  display: block;
+  background: #fdeaea;
+  color: #b02a2a;
+  border: 1px solid #f1b8b8;
+}
+
+/* "Proceed to Payment" link inside the success message-box after a
+   booking request is submitted. */
+.pay-now-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 700;
+  color: #916b00;
+  text-decoration: underline;
+}
+.pay-now-link:hover {
+  color: #6f5300;
+}
+
+/* -----------------------------------------------------------
+   Small-screen tweaks
+   ----------------------------------------------------------- */
+@media (max-width: 767px) {
+  .accomodation_item .hotel_img {
+    height: 220px;
+  }
+  .gallery_grid img {
+    height: 200px;
+  }
+  .banner_content h2 {
+    font-size: 28px;
+  }
+  .hotel_booking_table {
+    padding: 20px 15px;
+  }
+  .navbar .logo_h img {
+    height: 48px;
+  }
+}
+
+/* Booking form section spacing */
+.booking_form_area .form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #222222;
+  font-size: 14px;
+  font-weight: 500;
+}
+.booking_form_area .form-control {
+  height: 48px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+/* -----------------------------------------------------------
+   "Plan Your Stay" hero search bar - the template puts the
+   heading beside the search fields once the viewport is wide
+   enough to stay in a row (>767px). We want the heading sitting
+   above the fields at every width, not just on small phones.
+   ----------------------------------------------------------- */
+.hotel_booking_table {
+  display: block !important;
+  padding: 30px 40px;
+}
+.hotel_booking_table h2 {
+  margin-bottom: 20px;
+}
+.boking_table {
+  margin-left: 0;
+}
+@media (max-width: 767px) {
+  .hotel_booking_table {
+    padding: 30px 15px;
+  }
+}
+
+/* -----------------------------------------------------------
+   Rates & Pricing card - shown on the public site, populated
+   from the admin-editable /api/rates data.
+   ----------------------------------------------------------- */
+.rates-card {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 30px 35px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+.rates-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 30px;
+  justify-content: center;
+  margin-bottom: 22px;
+  font-size: 15px;
+  color: #555555;
+}
+.rates-meta strong {
+  color: #222222;
+}
+.rates-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+}
+.rates-table thead th {
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #999999;
+  padding: 8px 10px;
+  border-bottom: 2px solid #f3c300;
+}
+.rates-table tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 15px;
+  color: #222222;
+}
+.rates-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.rates-fees {
+  list-style: none;
+  margin: 0;
+  padding: 14px 0 0;
+  border-top: 1px dashed #ddd;
+  font-size: 14px;
+  color: #777777;
+}
+.rates-fees li {
+  padding: 4px 0;
+}
+@media (max-width: 575px) {
+  .rates-card {
+    padding: 24px 20px;
+  }
+  .rates-meta {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+}

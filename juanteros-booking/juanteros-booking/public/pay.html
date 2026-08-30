@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="images/logo.png" type="image/png" id="site-favicon">
+    <title>Complete Your Payment — Juantero's Staycation</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom-overrides.css">
+    <link rel="stylesheet" href="css/pay.css">
+</head>
+<body class="pay-page">
+
+    <header class="pay-header">
+        <a href="index.html" class="pay-logo"><img src="images/logo.png" alt="Juantero's Staycation" data-site-img="logo"></a>
+    </header>
+
+    <main class="pay-container">
+
+        <div id="pay-loading" class="pay-card pay-loading">Loading your booking&hellip;</div>
+
+        <div id="pay-not-found" class="pay-card pay-error-card" style="display:none;">
+            <h2>Booking Not Found</h2>
+            <p>We couldn't find a booking that matches this link. Please check your email for the correct link, or reach out to us directly.</p>
+        </div>
+
+        <div id="pay-content" style="display:none;">
+
+            <!-- Booking Summary -->
+            <div class="pay-card">
+                <h2 class="pay-card-title">Your Booking</h2>
+                <div class="pay-summary-row"><span>Guest</span><strong id="sum-name"></strong></div>
+                <div class="pay-summary-row"><span>Balai</span><strong id="sum-room"></strong></div>
+                <div class="pay-summary-row"><span>Check-in</span><strong id="sum-checkin"></strong></div>
+                <div class="pay-summary-row"><span>Check-out</span><strong id="sum-checkout"></strong></div>
+                <div class="pay-summary-row"><span>Guests</span><strong id="sum-guests"></strong></div>
+                <div class="pay-summary-row"><span>Booking Status</span><span id="sum-status" class="status-badge"></span></div>
+                <div class="pay-summary-row"><span>Payment Status</span><span id="sum-payment-status" class="status-badge"></span></div>
+            </div>
+
+            <!-- Status banners -->
+            <div id="pay-banner-cancelled" class="pay-banner pay-banner-error" style="display:none;">
+                This booking was cancelled, so payment can no longer be submitted. Please reach out to us or submit a new booking request.
+            </div>
+            <div id="pay-banner-submitted" class="pay-banner pay-banner-pending" style="display:none;">
+                We've received your proof of payment and it's under review. We'll email you once it's verified. You can still submit a new screenshot below if you need to correct something.
+            </div>
+            <div id="pay-banner-verified" class="pay-banner pay-banner-success" style="display:none;">
+                Your payment has been verified. We'll be in touch to confirm your booking. Thank you!
+            </div>
+            <div id="pay-banner-rejected" class="pay-banner pay-banner-error" style="display:none;">
+                We weren't able to verify your last proof of payment. Please double-check the details and submit it again below.
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="pay-card" id="pay-form-card">
+                <h2 class="pay-card-title">How to Pay</h2>
+                <p class="pay-card-subtitle">Choose a payment method, send your total balance, then upload your proof of payment below.</p>
+
+                <div class="pay-method-tabs" id="pay-method-tabs">
+                    <button type="button" class="pay-method-tab active" data-method="bank">Bank Transfer</button>
+                    <button type="button" class="pay-method-tab" data-method="gcash">GCash</button>
+                    <button type="button" class="pay-method-tab" data-method="maya">Maya</button>
+                </div>
+
+                <div class="pay-method-panel" id="pay-method-panel">
+                    <!-- Populated by pay.js -->
+                </div>
+
+                <form id="proof-form" class="pay-proof-form">
+                    <div class="admin-field">
+                        <label for="proof-reference">Reference / Transaction Number (optional)</label>
+                        <input type="text" id="proof-reference" placeholder="e.g. Ref No. 123456789">
+                    </div>
+                    <div class="admin-field">
+                        <label for="proof-image">Screenshot of Payment</label>
+                        <input type="file" id="proof-image" accept=".jpg,.jpeg,.png,.webp" required>
+                    </div>
+                    <button type="submit" class="button_hover theme_btn_two pay-submit-btn" id="proof-submit-btn">
+                        Submit Proof of Payment
+                    </button>
+                    <div class="upload-status" id="proof-status"></div>
+                </form>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="pay.js"></script>
+</body>
+</html>

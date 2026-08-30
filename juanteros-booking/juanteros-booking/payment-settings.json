@@ -1,0 +1,26 @@
+{
+  "bank": {
+    "label": "Bank Transfer",
+    "accountName": "Juantero's Staycation",
+    "accountNumber": "Set this up in the admin console",
+    "bankName": "Bank Name",
+    "instructions": "Transfer your total balance to the account above, then upload your proof of payment below.",
+    "qrImage": null
+  },
+  "gcash": {
+    "label": "GCash",
+    "accountName": "Juantero's Staycation",
+    "accountNumber": "Set this up in the admin console",
+    "bankName": "",
+    "instructions": "Send your total balance via GCash to the number above, or scan the QR code, then upload your proof of payment below.",
+    "qrImage": null
+  },
+  "maya": {
+    "label": "Maya",
+    "accountName": "Juantero's Staycation",
+    "accountNumber": "Set this up in the admin console",
+    "bankName": "",
+    "instructions": "Send your total balance via Maya to the number above, or scan the QR code, then upload your proof of payment below.",
+    "qrImage": null
+  }
+}

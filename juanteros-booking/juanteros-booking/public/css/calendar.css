@@ -1,0 +1,230 @@
+/* ===========================================================
+   Juantero's Staycation — Booking date range calendar
+   Airbnb-inspired: minimal, two-month view, dark selected range,
+   struck-through unavailable dates.
+   =========================================================== */
+
+.date-range-group {
+  position: relative;
+}
+
+.date-range-trigger {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  cursor: pointer;
+  color: #222;
+}
+.date-range-trigger:disabled {
+  background: #f2f2f2;
+  color: #999;
+  cursor: not-allowed;
+}
+.date-range-trigger:focus {
+  outline: none;
+  border-color: #f3c300;
+  box-shadow: 0 0 0 2px rgba(243, 195, 0, 0.25);
+}
+
+.calendar-popover {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + 10px);
+  left: 0;
+  width: min(640px, 92vw);
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+  padding: 1.25rem;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.calendar-nav {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: #222;
+}
+.calendar-nav:hover:not(:disabled) {
+  border-color: #222;
+}
+.calendar-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.calendar-months {
+  display: flex;
+  gap: 2rem;
+  flex: 1;
+  justify-content: center;
+}
+.cal-month {
+  flex: 1;
+  min-width: 220px;
+}
+.cal-month-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-bottom: 0.6rem;
+  color: #222;
+}
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 0.7rem;
+  color: #999;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 2px;
+}
+.cal-cell {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cal-day {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  font-size: 0.85rem;
+  color: #222;
+  cursor: pointer;
+  border-radius: 50%;
+  position: relative;
+}
+.cal-day:hover:not(.disabled):not(.selected) {
+  background: #f3c300;
+  color: #222;
+}
+.cal-day.disabled {
+  color: #d0d0d0;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+.cal-day.in-range {
+  background: #fdf3d0;
+  border-radius: 0;
+}
+.cal-day.in-range.range-start,
+.cal-day.range-start {
+  border-radius: 50% 0 0 50%;
+}
+.cal-day.in-range.range-end,
+.cal-day.range-end {
+  border-radius: 0 50% 50% 0;
+}
+.cal-day.hover-end {
+  background: #fdf3d0;
+  border-radius: 0 50% 50% 0;
+}
+.cal-day.selected {
+  background: #222222;
+  color: #fff;
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.78rem;
+  color: #666;
+  margin: 0.9rem 0 1rem;
+  flex-wrap: wrap;
+}
+.calendar-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  font-style: normal;
+}
+.legend-blocked {
+  background: #f2f2f2;
+  border: 1px solid #d0d0d0;
+}
+.legend-selected {
+  background: #222222;
+}
+
+.calendar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-top: 1px solid #eee;
+  padding-top: 0.85rem;
+  flex-wrap: wrap;
+}
+.calendar-hint {
+  font-size: 0.8rem;
+  color: #666;
+}
+.calendar-hint-error {
+  color: #b02a2a;
+}
+.calendar-footer-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+.calendar-clear-btn {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #222;
+  padding: 6px 4px;
+}
+.calendar-close-btn {
+  background: #222222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.calendar-close-btn:hover {
+  background: #000;
+}
+
+@media (max-width: 640px) {
+  .calendar-popover {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92vw;
+    padding: 1rem;
+  }
+  .calendar-months {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "balai-ima",
+    "name": "Balai Ima",
+    "capacity": "6 - 10 pax",
+    "image": "images/balai-ima.jpg",
+    "details": [
+      "1 Toilet",
+      "1 Bathroom",
+      "Sala w/ TV",
+      "1 room w/ attic",
+      "1 master bedroom"
+    ]
+  },
+  {
+    "id": "balai-hiraya",
+    "name": "Balai Hiraya",
+    "capacity": "10 - 15 pax",
+    "image": "images/balai-hiraya.jpg",
+    "details": [
+      "1 Family Room",
+      "1 Barkada Room",
+      "1 Toilet & Bath",
+      "Airconditioned",
+      "Smart Projector",
+      "Smart TV"
+    ]
+  }
+]

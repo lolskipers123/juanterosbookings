@@ -1,0 +1,31 @@
+{
+  "checkIn": "2:00 PM",
+  "checkOut": "12:00 PM",
+  "durationLabel": "22 hours",
+  "tiers": [
+    {
+      "label": "1 - 2 pax",
+      "price": 2500
+    },
+    {
+      "label": "3 - 4 pax",
+      "price": 3500
+    },
+    {
+      "label": "5 - 6 pax",
+      "price": 4500
+    },
+    {
+      "label": "7 - 8 pax",
+      "price": 5500
+    },
+    {
+      "label": "9 - 10 pax",
+      "price": 6500
+    }
+  ],
+  "excessPaxFee": 500,
+  "excessPaxLabel": "In excess of 10 pax, add per head",
+  "petFee": 400,
+  "petFeeLabel": "Pet Fee"
+}

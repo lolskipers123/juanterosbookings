@@ -1,0 +1,26 @@
+{
+  "logo": {
+    "label": "Site Logo (header & favicon)",
+    "image": "images/logo.png"
+  },
+  "hero-bg": {
+    "label": "Hero Banner Background",
+    "image": "images/hero-bg.jpg"
+  },
+  "gallery-1": {
+    "label": "Gallery Photo 1",
+    "image": "images/gallery-1.jpg"
+  },
+  "gallery-2": {
+    "label": "Gallery Photo 2 (also Facilities background)",
+    "image": "images/gallery-2.jpg"
+  },
+  "gallery-3": {
+    "label": "Gallery Photo 3",
+    "image": "images/gallery-3.jpg"
+  },
+  "gallery-4": {
+    "label": "Gallery Photo 4 (also About section photo)",
+    "image": "images/gallery-4.jpg"
+  }
+}

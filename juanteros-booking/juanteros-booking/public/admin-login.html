@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — Juantero's Staycation</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/_variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-login.css">
+</head>
+<body class="admin-login-body">
+  <div class="admin-login-card">
+    <p class="admin-login-title">Juantero's Staycation</p>
+    <p class="admin-login-subtitle">Admin Console Login</p>
+
+    <form id="admin-login-form">
+      <div class="admin-field">
+        <label for="login-username">Username</label>
+        <input type="text" id="login-username" name="username" autocomplete="username" required>
+      </div>
+      <div class="admin-field">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" name="password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn theme_btn button_hover admin-login-btn" id="admin-login-btn">Log In</button>
+      <div id="admin-login-message" class="message-box"></div>
+    </form>
+
+    <a class="admin-login-back" href="index.html">&larr; Back to Public Site</a>
+  </div>
+
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="admin-login.js"></script>
+</body>
+</html>

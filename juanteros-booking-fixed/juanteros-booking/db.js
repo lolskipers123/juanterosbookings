@@ -19,9 +19,23 @@ if (usePostgres) {
   // certificates aren't always in Node's default trust store, so we
   // disable strict verification here. This is standard practice for
   // connecting to Supabase from a Node backend.
+  //
+  // `max: 1` matters a lot on Vercel specifically: this whole module gets
+  // re-run (and a fresh Pool created) on every cold serverless instance,
+  // and several instances can run at the same time (e.g. one page load
+  // firing off a dozen parallel requests for images/css/js). Supabase's
+  // pooler only allows a limited number of simultaneous clients - with
+  // the default pg pool size (10) per instance, just 2-3 concurrent
+  // instances is enough to blow past that limit and start throwing
+  // "max clients reached" errors. Capping each instance's own pool to a
+  // single connection keeps total usage well under Supabase's limit no
+  // matter how many instances Vercel spins up. This is the standard
+  // pattern recommended for serverless + Supabase/PgBouncer.
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
+    ssl: { rejectUnauthorized: false },
+    max: 1,
+    idleTimeoutMillis: 10000
   });
 }
 

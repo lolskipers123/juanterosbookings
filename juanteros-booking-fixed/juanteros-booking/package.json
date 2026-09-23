@@ -1,0 +1,20 @@
+{
+  "name": "juanteros-booking-system",
+  "version": "1.0.0",
+  "description": "Booking engine for Juantero's Staycation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.19.2",
+    "express-session": "^1.19.0",
+    "multer": "^2.0.1",
+    "nodemailer": "^6.10.1",
+    "pg": "^8.13.1",
+    "qrcode": "^1.5.4"
+  }
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juantero's Staycation Admin Console</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/_variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-login.css">
+</head>
+<body>
+  <header class="admin-header">
+    <div>
+      <p class="admin-title">Juantero's Staycation</p>
+      <p class="admin-subtitle">Admin Console — Bookings, Availability &amp; Photos</p>
+    </div>
+    <div class="admin-header-actions">
+      <a class="back-link" href="index.html">&larr; View Public Site</a>
+      <button type="button" class="back-link" id="admin-logout-btn">Log Out</button>
+    </div>
+  </header>
+
+  <main class="admin-container">
+
+    <!-- ROOM PHOTOS -->
+    <section class="admin-section">
+      <h2>Room Photos</h2>
+      <p class="section-desc">
+        Update the photo guests see for each Balai on the public site. Uploading a new photo
+        replaces the current one immediately. Accepted formats: JPG, PNG, WEBP (max 5MB).
+      </p>
+      <div class="room-photo-grid" id="room-photo-grid">
+        <!-- Populated dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- SITE PHOTOS -->
+    <section class="admin-section">
+      <h2>Site Photos</h2>
+      <p class="section-desc">
+        Update the logo, hero background, and gallery photos shown across the public site
+        (home banner, gallery section, about photo, facilities background, and footer).
+        Accepted formats: JPG, PNG, WEBP (max 5MB).
+      </p>
+      <div class="room-photo-grid" id="site-image-grid">
+        <!-- Populated dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- RATES & PRICING -->
+    <section class="admin-section">
+      <h2>Rates &amp; Pricing</h2>
+      <p class="section-desc">
+        Set the check-in/check-out times and the per-pax price tiers guests see on the public site.
+        Add or remove tiers as needed, then set the excess-pax and pet fees.
+      </p>
+
+      <div class="admin-form-row" style="margin-bottom: 1rem;">
+        <div class="admin-field">
+          <label for="rates-checkin">Check-in</label>
+          <input type="text" id="rates-checkin" placeholder="e.g. 2:00 PM">
+        </div>
+        <div class="admin-field">
+          <label for="rates-checkout">Check-out</label>
+          <input type="text" id="rates-checkout" placeholder="e.g. 12:00 PM">
+        </div>
+        <div class="admin-field">
+          <label for="rates-duration">Duration label</label>
+          <input type="text" id="rates-duration" placeholder="e.g. 22 hours">
+        </div>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Pax Range / Label</th>
+              <th>Price (₱)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="rates-tiers-list">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+      <button type="button" id="rates-add-tier-btn" class="admin-btn" style="margin: 0.75rem 0 1.5rem;">+ Add Tier</button>
+
+      <div class="admin-form-row" style="margin-bottom: 1rem;">
+        <div class="admin-field">
+          <label for="rates-excess-label">Excess-pax label</label>
+          <input type="text" id="rates-excess-label" placeholder="e.g. In excess of 10 pax, add per head">
+        </div>
+        <div class="admin-field">
+          <label for="rates-excess-fee">Excess-pax fee (₱)</label>
+          <input type="number" id="rates-excess-fee" min="0" step="1">
+        </div>
+        <div class="admin-field">
+          <label for="rates-pet-label">Pet fee label</label>
+          <input type="text" id="rates-pet-label" placeholder="e.g. Pet Fee">
+        </div>
+        <div class="admin-field">
+          <label for="rates-pet-fee">Pet fee (₱)</label>
+          <input type="number" id="rates-pet-fee" min="0" step="1">
+        </div>
+      </div>
+
+      <button type="button" id="rates-save-btn" class="admin-btn admin-btn-primary">Save Rates</button>
+      <div class="upload-status" id="rates-status"></div>
+    </section>
+
+    <!-- PAYMENT SETTINGS -->
+    <section class="admin-section">
+      <h2>Payment Settings</h2>
+      <p class="section-desc">
+        Set the account details guests will see on the payment page (sent to them after they submit a
+        booking request) for Bank Transfer, GCash, and Maya. Optionally upload a QR code for each.
+      </p>
+      <div class="room-photo-grid" id="payment-settings-grid">
+        <!-- Populated dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- CLOSED DATES -->
+    <section class="admin-section">
+      <h2>Closed / Blocked Dates</h2>
+      <p class="section-desc">
+        Mark date ranges as unavailable (maintenance, private events, holidays, etc.).
+        Guests won't be able to submit a booking that overlaps a closed range.
+      </p>
+      <form id="closed-date-form" class="admin-form-row" style="margin-bottom: 1.5rem;">
+        <div class="admin-field">
+          <label for="closed-room-select">Room</label>
+          <select id="closed-room-select" required>
+            <option value="all">All Rooms</option>
+          </select>
+        </div>
+        <div class="admin-field">
+          <label for="closed-start-date">From</label>
+          <input type="date" id="closed-start-date" required>
+        </div>
+        <div class="admin-field">
+          <label for="closed-end-date">To</label>
+          <input type="date" id="closed-end-date" required>
+        </div>
+        <div class="admin-field grow">
+          <label for="closed-reason">Reason (optional)</label>
+          <input type="text" id="closed-reason" placeholder="e.g. Maintenance">
+        </div>
+        <button type="submit" class="admin-btn admin-btn-primary">Add Closed Dates</button>
+      </form>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Room</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Reason</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="closed-dates-list">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- BOOKINGS -->
+    <section class="admin-section">
+      <h2>All Booking Requests</h2>
+      <p class="section-desc">Review, approve, or cancel reservation requests submitted by guests.</p>
+
+      <div class="admin-form-row" style="margin-bottom: 1.5rem; align-items: flex-end;">
+        <div class="admin-field">
+          <label for="booking-month-filter">Filter by check-in month</label>
+          <input type="month" id="booking-month-filter">
+        </div>
+        <button type="button" id="clear-booking-filter" class="admin-btn">Clear Filter</button>
+        <button type="button" id="export-bookings-btn" class="admin-btn admin-btn-primary">Export to Excel</button>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Guest Name</th>
+              <th>Contact Details</th>
+              <th>Selected Balai</th>
+              <th>Check-in</th>
+              <th>Check-out</th>
+              <th>Pax</th>
+              <th>Status</th>
+              <th>Payment</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bookings-list">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

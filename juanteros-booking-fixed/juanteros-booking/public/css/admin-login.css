@@ -1,0 +1,102 @@
+/* Admin login screen - matches the admin console's gold/charcoal palette
+   defined in admin.css (--admin-gold, --admin-dark, etc.) */
+.admin-login-body {
+  background: var(--admin-dark, #222222);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 380px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.admin-login-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--admin-dark, #222222);
+  margin: 0;
+}
+
+.admin-login-subtitle {
+  color: var(--admin-gray, #6b7280);
+  font-size: 0.9rem;
+  margin: 0.25rem 0 1.75rem;
+}
+
+.admin-login-card .admin-field {
+  text-align: left;
+  margin-bottom: 1.1rem;
+}
+
+.admin-login-card .admin-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--admin-dark, #222222);
+  margin-bottom: 0.35rem;
+}
+
+.admin-login-card .admin-field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--admin-border, #e5e7eb);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.admin-login-card .admin-field input:focus {
+  outline: none;
+  border-color: var(--admin-gold, #f3c300);
+}
+
+.admin-login-btn {
+  width: 100%;
+  border: none;
+  margin-top: 0.25rem;
+  cursor: pointer;
+}
+
+.admin-login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-login-back {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--admin-gray, #6b7280);
+}
+
+.admin-login-back:hover {
+  color: var(--admin-gold, #f3c300);
+}
+
+#admin-login-message {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+/* Header logout button, sits next to the "View Public Site" link */
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+button.back-link {
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
